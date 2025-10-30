@@ -1,43 +1,86 @@
 
 :root{
-  --bg:#0e2a2e; --panel:#103a3f; --text:#eafaf9; --accent:#ff7b00; --muted:#9cd3c8;
+  --bg:#0e3e42;
+  --panel:#0f494e;
+  --accent:#ff7a00;
+  --text:#e8f6f8;
+  --muted:#b4d6d9;
 }
 *{box-sizing:border-box}
-html,body{height:100%}
+html,body{height:100%;margin:0}
 body{
-  margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, Helvetica, sans-serif;
+  background: url('../img/texture.jpg') repeat;
   color:var(--text);
-  background:
-    radial-gradient(20% 30% at 10% 10%, rgba(255,255,255,.03), transparent 60%),
-    radial-gradient(30% 20% at 80% 20%, rgba(255,255,255,.03), transparent 60%),
-    radial-gradient(25% 25% at 30% 80%, rgba(255,255,255,.02), transparent 60%),
-    #0e2a2e;
-  overflow:hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  overflow:hidden; /* фиксированные страницы без прокрутки */
 }
-a{color:var(--muted); text-decoration:none}
-a:hover{color:#fff}
-.container{max-width:1100px;margin:0 auto;padding:24px;height:calc(100vh - 120px);display:flex;flex-direction:column;justify-content:space-between}
-.header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,0));border-bottom:1px solid rgba(255,255,255,.08)}
-.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:1px}
-.brand img{width:44px;height:44px;border-radius:6px;object-fit:cover}
-nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
-nav a{padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.06)}
-nav a.active, nav a:hover{background:var(--accent);color:#161616}
-.panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:24px;display:flex;gap:24px;align-items:center;height:100%;overflow:hidden}
-.panel .text{flex:1;min-width:280px}
-.panel h1{margin:0 0 8px;font-size:40px;line-height:1.1}
-.panel p{margin:0 0 8px;color:#d2efe9}
-.panel .media{flex:1.1;min-height:300px;border-radius:14px;overflow:hidden;background:#0c1f22;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.08)}
-.panel .media img{width:100%;height:100%;object-fit:cover}
-.footer{padding:10px 24px;color:#bfe3dc;opacity:.9;font-size:14px}
-.btn{display:inline-block;padding:10px 16px;border-radius:10px;font-weight:600;background:var(--accent);color:#111}
-.btn.secondary{background:transparent;border:1px solid rgba(255,255,255,.25);color:#eafaf9}
-.btn + .btn{margin-left:10px}
-.gallery{display:grid;grid-template-columns: repeat(3, 1fr);gap:10px;height:100%;overflow:auto;padding-right:4px}
-.gallery img{width:100%;height:200px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.1)}
-.table{width:100%;border-collapse:collapse;overflow:auto;max-height:100%}
-.table th,.table td{border-bottom:1px dashed rgba(255,255,255,.15);padding:10px 8px;text-align:left}
-.tg-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:#2AABEE;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(0,0,0,.35);z-index:999}
-.tg-fab img{width:30px;height:30px}
-@media (max-width:900px){.panel{flex-direction:column}.gallery{grid-template-columns: repeat(2,1fr)}}
-@media (max-width:560px){nav ul{gap:8px}.gallery{grid-template-columns:1fr}}
+a{color:var(--text); text-decoration:none}
+.page{
+  height:100%;
+  display:grid;
+  grid-template-rows:64px 1fr 48px;
+}
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 16px; background: rgba(5,25,27,.7); backdrop-filter: blur(6px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.nav .brand{font-weight:800; letter-spacing:1px}
+.nav nav{display:flex; gap:14px; flex-wrap:wrap}
+.nav a{opacity:.9; padding:8px 10px; border-radius:8px}
+.nav a:hover, .nav a.active{background:rgba(255,255,255,.09)}
+
+.main{
+  display:grid; place-items:center;
+  padding:16px;
+}
+.panel{
+  width:min(1100px, 92vw); height: calc(100% - 16px);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px; padding:24px;
+  display:grid; grid-template-columns:1fr 1fr; gap:24px;
+}
+.panel.single{grid-template-columns:1fr}
+.h1{font-size:42px; line-height:1.1; margin:0 0 8px}
+.lead{font-size:18px; color:var(--muted); margin:0}
+.cta-row{display:flex; gap:12px; margin-top:18px}
+.btn{background:var(--accent); color:#111; padding:10px 16px; border-radius:10px; font-weight:700}
+.btn.alt{background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.25)}
+.cover{width:100%; height:100%; border-radius:12px; object-fit:cover; box-shadow:0 8px 40px rgba(0,0,0,.35)}
+.footer{
+  display:grid; place-items:center; font-size:12px; color:var(--muted);
+  background: rgba(5,25,27,.65); border-top:1px solid rgba(255,255,255,.08);
+}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+.kpi{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:14px}
+.kpi b{color:#fff; font-size:20px}
+
+.table{width:100%; border-collapse:collapse; font-size:14px}
+.table th,.table td{border-bottom:1px solid rgba(255,255,255,.1); padding:10px 8px; text-align:left}
+.table th{color:var(--muted); font-weight:600}
+
+.gallery{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; height:100%}
+.gallery img{width:100%; height:100%; object-fit:cover; border-radius:10px; cursor:pointer;}
+
+.modal{position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; align-items:center; justify-content:center; z-index:20}
+.modal.open{display:flex}
+.modal img{max-width:92vw; max-height:86vh; border-radius:10px;}
+
+.list{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+.card{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); padding:14px; border-radius:12px}
+.card h4{margin:6px 0 6px}
+.small{color:var(--muted); font-size:13px}
+
+.order{display:grid; grid-template-columns:1.2fr .8fr; gap:24px}
+.order .box{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:16px}
+
+@media (max-width:900px){
+  .panel{grid-template-columns:1fr; height: calc(100% - 12px);}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .list{grid-template-columns:1fr}
+  .order{grid-template-columns:1fr}
+}
+
+/* ensure content fits without global scroll; internal areas can scroll if overflow */
+.scroll{overflow:auto}

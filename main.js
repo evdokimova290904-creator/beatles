@@ -1,12 +1,14 @@
 
-document.addEventListener('click',(e)=>{
-  const t=e.target;
-  if(t.matches('.gallery img')){
-    const modal=document.createElement('div');
-    modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999';
-    modal.innerHTML=`<img src="${t.src}" style="max-width:90vw;max-height:90vh;border-radius:12px">`;
-    modal.addEventListener('click',()=>modal.remove());
-    document.body.appendChild(modal);
-  }
+// highlight active link
+const path = location.pathname.split('/').pop() || 'index.html';
+document.querySelectorAll('.nav nav a').forEach(a=>{
+  if(a.getAttribute('href')===path){a.classList.add('active')}
+})
+// gallery lightbox
+const modal = document.createElement('div'); modal.className='modal'; modal.innerHTML='<img/>';
+document.body.appendChild(modal);
+document.addEventListener('click',e=>{
+  const img = e.target.closest('.gallery img');
+  if(img){ modal.querySelector('img').src = img.src; modal.classList.add('open'); }
+  if(e.target===modal){ modal.classList.remove('open'); }
 });
-(function(){const here=location.pathname.split('/').pop()||'index.html';document.querySelectorAll('nav a').forEach(a=>{if(a.getAttribute('href')===here)a.classList.add('active')})})();
